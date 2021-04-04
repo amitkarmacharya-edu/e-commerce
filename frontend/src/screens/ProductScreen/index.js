@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../../components/Rating';
-import products from '../../products';
+import { listProductDetails } from '../../store/actions/productActions'
 
 const ProductScreen = ({ match }) => {
-  const product = products.find((p) => p._id === match.params.id );
+  const dispatch = useDispatch();
+  const productDetails = useSelector(state => state.productDetails)
+  const { loading, error, product } = productDetails
+
+  useEffect(() => {
+    dispatch(listProductDetails(match.params.id))
+  }, [dispatch, match])
 
   return (
     <>
