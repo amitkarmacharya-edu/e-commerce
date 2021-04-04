@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const orderSchemal = mongooes.mongooseSchema({
+const orderSchema = mongoose.Schema({
   name: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -87,6 +87,6 @@ const orderSchemal = mongooes.mongooseSchema({
   timestamps: true
 })
 
-const Order = mongoose.model('Order', userSchema)
+const Order = mongoose.model('Order', orderSchema)
 
 module.exports = Order

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { stringify } = require('qs')
 
 const reviewSchema = mongoose.Schema({
   name: { type: String, required: true },
@@ -9,7 +8,7 @@ const reviewSchema = mongoose.Schema({
   timestamps: true,
 })
 
-const productSchema = mongoose.mongooseSchema({
+const productSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -60,6 +59,6 @@ const productSchema = mongoose.mongooseSchema({
   timestamps: true
 })
 
-const Product = mongoose.model('Product', userSchema)
+const Product = mongoose.model('Product', productSchema)
 
 module.exports = Product
