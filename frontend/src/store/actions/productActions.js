@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_FAIL,
