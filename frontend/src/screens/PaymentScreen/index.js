@@ -15,7 +15,7 @@ const PaymentScreen = ({ history }) => {
     history.push("/shipping");
   }
 
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+  const [paymentMethod, setPaymentMethod] = useState('Paypal');
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -26,14 +26,14 @@ const PaymentScreen = ({ history }) => {
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
       <h1>Payment Method</h1>
-      <Form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler} >
         <Form.Group>
           <Form.Label as="legend">Select Method</Form.Label>
           <Col>
             <Form.Check
               type="radio"
               label="Paypal or Credit Card"
-              id="Paypal"
+              id="paypal"
               name="paymentMethod"
               value="Paypal"
               checked
@@ -42,7 +42,7 @@ const PaymentScreen = ({ history }) => {
             <Form.Check
               type="radio"
               label="Stripe"
-              id="Stripe"
+              id="stripe"
               name="paymentMethod"
               value="Stripe"
               onChange={(e) => setPaymentMethod(e.target.value)}
