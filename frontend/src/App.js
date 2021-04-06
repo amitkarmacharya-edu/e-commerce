@@ -10,6 +10,7 @@ import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import LoginScreen from './screens/LoginScreen'
 import ShippingScreen from './screens/ShippingScreen'
+import PaymentScreen from './screens/PaymentScreen'
 import './App.css'
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <Header />
         <main className='py-3'>
           <Container>
+            <Route path='/payment' component={PaymentScreen} />
             <Route path='/shipping' component={ShippingScreen} />
             <Route path='/profile' component={ProfileScreen} />
             <Route path='/register' component={RegisterScreen} />
