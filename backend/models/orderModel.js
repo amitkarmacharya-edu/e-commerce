@@ -1,15 +1,16 @@
 const mongoose = require('mongoose')
 
 const orderSchema = mongoose.Schema({
-  name: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'User'
   },
+
   orderItems: [
     {
       name: { type: String, required: true},
-      quantily : { type: Number, required: true},
+      qty : { type: Number, required: true},
       image: { type: String, rquired: true },
       price: { type: String, rquired: true },
       product: {
@@ -19,6 +20,7 @@ const orderSchema = mongoose.Schema({
       }
     }
   ],
+
   shippingAddress: {
     address: { type: String, required: true },
     city: { type: String, rquired: true },
