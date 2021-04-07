@@ -9,6 +9,9 @@ import {
   ORDER_PAY_FAIL,
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
+  ORDER_LIST_USER_FAIL,
+  ORDER_LIST_USER_REQUEST,
+  ORDER_LIST_USER_SUCCESS,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -137,11 +140,7 @@ export const listMyOrder = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/orders/myorders`,
-      paymentResult,
-      config
-    );
+    const { data } = await axios.get(`/api/orders/myorders`, config);
 
     dispatch({
       type: ORDER_LIST_USER_SUCCESS,
