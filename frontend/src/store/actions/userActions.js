@@ -174,7 +174,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   }
 };
 
-export const userListReducer = () => async (dispatch, getState) => {
+export const userList = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_LIST_REQUEST,
