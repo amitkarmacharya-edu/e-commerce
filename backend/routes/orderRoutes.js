@@ -5,7 +5,7 @@ const protect = require("../middleware/authMiddleware");
 
 router.route('/').post(protect, addOrderItem)
 router.route('/:id').get(protect, getOrderById)
-router.route('/myorders').put(protect, updateOrderToPaid)
-router.route('/orders').get(protect, getMyOrders)
+router.route('/orders').put(protect, updateOrderToPaid)
+router.route('/myorders').get(protect, getMyOrders)
 
 module.exports = router
