@@ -29,7 +29,7 @@ const reducer = combineReducers({
   orderDetails: orderDetailReducer,
   orderPay: orderPayReducer,
   orderListUser: orderListUserReducer,
-  deleteUser: userDetailReducer,
+  deleteUser: userDeleteReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
