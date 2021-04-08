@@ -13,6 +13,7 @@ import {
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
+  USER_LIST_RESET,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
@@ -63,6 +64,7 @@ export const logout = () => async (dispatch) => {
   });
   dispatch({type: USER_DETAIL_RESET})
   dispatch({type: ORDER_LIST_USER_RESET})
+  dispatch({type: USER_LIST_RESET})
 
 };
 
