@@ -38,7 +38,7 @@ const UserEditScreen = ({ match, history }) => {
     }
     
     
-  }, [dispatch, history, userId, user]);
+  }, [dispatch, history, userId, user, successEdit]);
 
   const submitHandler = (e) => {
     e.preventDefault()

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { PayPalButton } from "react-paypal-button-v2";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
@@ -23,7 +23,7 @@ const OrderDetailScreen = ({ match }) => {
   const { loading, order, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
-  const { loading: loadingPay, success: successPay } = orderPay;
+  const { success: successPay } = orderPay;
 
   if (!loading) {
     // calculate prices
