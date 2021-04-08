@@ -7,7 +7,9 @@ import Loader from "../../components/Loader";
 import {
   listProducts,
   deleteProduct as deleteProductWithId,
+  createProduct as createNewProduct,
 } from "../../store/actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../../store/constants/productConstants";
 
 const ProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -17,6 +19,9 @@ const ProductListScreen = ({ history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  
+  const createProduct = useSelector((state) => state.createProduct);
+  const { loading: loadingCreate, success: successCreate, error: errorCreate, product: createdProduct } = createProduct;
 
   const deleteProduct = useSelector((state) => state.deleteProduct);
   const {
@@ -26,16 +31,23 @@ const ProductListScreen = ({ history }) => {
   } = deleteProduct;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
+    dispatch({ type: PRODUCT_CREATE_RESET})
+
+    if (!userInfo || !userInfo.isAdmin) {
+      history.push('/login')
+    } 
+
+    if(successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      history.push("/login");
+      dispatch(listProducts())
     }
-  }, [dispatch, history, userInfo, successDelete]);
+
+  }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct]);
 
   const createProductHandler = (id) => {
     if (window.confirm("Are you sure")) {
-      //
+      dispatch(createNewProduct())
     }
   };
   const deleteProductHandler = (productId) => {
@@ -59,6 +71,8 @@ const ProductListScreen = ({ history }) => {
       </Row>
       { loadingDelete && <Loader /> }
       { errorDelete && <Message variant='danger'>{errorDelete}</Message> }
+      { loadingCreate && <Loader /> }
+      { errorCreate && <Message variant='danger'>{errorCreate}</Message> }
       <h1>Products</h1>
       {loading ? (
         <Loader />
