@@ -19,7 +19,13 @@ const UserEditScreen = ({ match, history }) => {
   const { loading, error, user } = userDetails;
 
   useEffect(() => {
-    dispatch(getUserDetails(userId))
+    if(!user || user._id !== userId) {
+      dispatch(getUserDetails(userId))
+    } else {
+      setName(user.name)
+      setEmail(user.email)
+      setIsAdmin(user.isAdmin)
+    }
   }, [dispatch, user]);
 
   const submitHandler = (e) => {
@@ -59,6 +65,7 @@ const UserEditScreen = ({ match, history }) => {
             </Form.Group>
             <Form.Group controlId="isadmin">
               <Form.Check
+                label="Is Admin"
                 type="checkbox"
                 placeholder="Is Admin"
                 checked={isAdmin}
@@ -66,7 +73,7 @@ const UserEditScreen = ({ match, history }) => {
               ></Form.Check>
             </Form.Group>
             <Button type="submit" variant="primary">
-              Edit const ref = useRef(initialValue)
+              Update
             </Button>
           </Form>
         )}
