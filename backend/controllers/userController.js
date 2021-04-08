@@ -130,7 +130,7 @@ const deleteUser = expressAsyncHandler(async (req, res) => {
 // @route GET /api/users/:id
 // @access private/admin
 const getUserById = expressAsyncHandler(async (req, res) => {
-  const user = await (await User.findById(req.params.id)).selected("-password");
+  const user = await User.findById(req.params.id).select("-password");
   if (user) {
     res.json(user);
   } else {
@@ -140,7 +140,7 @@ const getUserById = expressAsyncHandler(async (req, res) => {
 });
 
 // @desc Update user 
-// @route PUT /api/users/:id
+// @route PUT /api/users/:id 
 // @access private/admin
 const updateUser = expressAsyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
