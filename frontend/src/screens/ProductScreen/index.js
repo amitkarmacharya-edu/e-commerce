@@ -166,7 +166,7 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroup.Item>
                   <h5>Write a customer Review</h5>
                   {errorReview && (
-                    <Message variant="dangeer">{errorReview}</Message>
+                    <Message variant="danger">{errorReview}</Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
