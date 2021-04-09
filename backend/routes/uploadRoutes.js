@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const multer = require('multer')
 const router = express.Router()
 
@@ -13,7 +14,7 @@ const storage = multer.diskStorage({
 
 function checkFileType(file, cb) {
   const filetypes = /jpg|jpeg|png/
-  const extname = filetypes.test(patha.extname(file.originalname).toLowerCase())
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
   if(extname && mimetype) {
