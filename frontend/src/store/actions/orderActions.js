@@ -129,7 +129,7 @@ export const payOrder = (orderId, paymentResult) => async (
   }
 };
 
-export const deliverORder = (orderId) => async (
+export const deliverOrder = (orderId) => async (
   dispatch,
   getState
 ) => {
