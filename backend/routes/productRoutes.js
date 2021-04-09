@@ -17,7 +17,7 @@ router
 
 router
   .route('/:id/review')
-    .post(protect, admin, createProductReview)
+    .post(protect, createProductReview)
     
 router
   .route("/:id")
