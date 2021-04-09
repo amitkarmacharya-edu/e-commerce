@@ -6,7 +6,16 @@ const { registerUser } = require("./userController");
 // @route GET /api/products
 // @access public
 const getProducts = expressAsyncHandler(async (req, res) => {
-  const products = await Product.find({});
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $option: "i",
+        },
+      }
+    : {};
+
+  const products = await Product.find({ ...keyword });
   res.json(products);
 });
 
@@ -31,8 +40,8 @@ const deleteProduct = expressAsyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    await product.remove()
-    res.json({ message: 'Product Removed'});
+    await product.remove();
+    res.json({ message: "Product Removed" });
   } else {
     res.status(404);
     throw new Error("Product not Found");
@@ -44,24 +53,24 @@ const deleteProduct = expressAsyncHandler(async (req, res) => {
 // @access private/admin
 const createProduct = expressAsyncHandler(async (req, res) => {
   const product = new Product({
-    name: 'Sample name',
+    name: "Sample name",
     price: 0,
     user: req.user._id,
-    image: '/image/sample.jpg',
-    brand: 'Sample brand',
-    category: 'Sample category',
+    image: "/image/sample.jpg",
+    brand: "Sample brand",
+    category: "Sample category",
     countInStock: 0,
     numReviews: 0,
-    description: 'Sample description'
-  })
+    description: "Sample description",
+  });
 
-  const createdProduct = await product.save()
+  const createdProduct = await product.save();
 
-  if(createdProduct){
-    res.status(201).json(createdProduct)
+  if (createdProduct) {
+    res.status(201).json(createdProduct);
   } else {
-    res.status(401)
-    throw new Error('Product Not Created')
+    res.status(401);
+    throw new Error("Product Not Created");
   }
 });
 
@@ -79,22 +88,22 @@ const updateProduct = expressAsyncHandler(async (req, res) => {
     description,
   } = req.body;
 
-  const product = await Product.findById(req.params.id)
+  const product = await Product.findById(req.params.id);
 
-  if(product){
-    product.name = name
-    product.price = price
-    product.image = image
-    product.brand = brand
-    product.category = category
-    product.countInStock = countInStock
-    product.description = description
+  if (product) {
+    product.name = name;
+    product.price = price;
+    product.image = image;
+    product.brand = brand;
+    product.category = category;
+    product.countInStock = countInStock;
+    product.description = description;
 
-    const updatedProduct = product.save()
-    res.json(updatedProduct)
+    const updatedProduct = product.save();
+    res.json(updatedProduct);
   } else {
-    res.status(404)
-    throw new Error('Product Not Found')
+    res.status(404);
+    throw new Error("Product Not Found");
   }
 });
 
@@ -102,37 +111,46 @@ const updateProduct = expressAsyncHandler(async (req, res) => {
 // @route POST /api/products/:id/review
 // @access private/admin
 const createProductReview = expressAsyncHandler(async (req, res) => {
-  const {
-    rating, comment
-  } = req.body;
+  const { rating, comment } = req.body;
 
-  const product = await Product.findById(req.params.id)
+  const product = await Product.findById(req.params.id);
 
-  if(product){
-    const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString())
+  if (product) {
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
 
-    if(alreadyReviewed) {
-      res.status(400)
-      throw new Error('Product already reviewed')
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error("Product already reviewed");
     }
 
     const review = {
       name: req.user.name,
       rating: Number(rating),
       comment,
-      user: req.user._id
-    }
-    
-    product.reviews.push(review)
-    product.numReviews = product.reviews.length
-    product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
-    
-    await product.save()
-    res.status(201).json({ message: "Review has been added"})
+      user: req.user._id,
+    };
+
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+    product.rating =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      product.reviews.length;
+
+    await product.save();
+    res.status(201).json({ message: "Review has been added" });
   } else {
-    res.status(404)
-    throw new Error('Product Not Found')
+    res.status(404);
+    throw new Error("Product Not Found");
   }
 });
 
-module.exports = { getProducts, getProductsById, deleteProduct, createProduct, updateProduct, createProductReview };
+module.exports = {
+  getProducts,
+  getProductsById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+  createProductReview,
+};
