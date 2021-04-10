@@ -8,7 +8,7 @@ import Paginate from "../../components/Paginate";
 import { listProducts } from "../../store/actions/productActions";
 
 const HomeScreen = ({ match }) => {
-  const keyword = match.params.id
+  const keyword = match.params.keyword
   const pageNumber = match.params.pageNumber || 1
 
   const dispatch = useDispatch();
