@@ -5,6 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import Product from "../../components/Product";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
+import Meta from "../../components/Meta";
 import Paginate from "../../components/Paginate";
 import ProductCarousel from "../../components/ProductCarousel";
 import { listProducts } from "../../store/actions/productActions";
