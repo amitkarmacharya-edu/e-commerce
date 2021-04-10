@@ -12,12 +12,12 @@ const getProducts = expressAsyncHandler(async (req, res) => {
     ? {
         name: {
           $regex: req.query.keyword,
-          $option: "i",
+          $options: "i",
         },
       }
     : {};
   
-  const count = await Product.count({ ...keyword })
+  const count = await Product.countDocuments({ ...keyword })
   const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1));
 
   res.json({products, page, pages: Math.ceil(count/pageSize)});
