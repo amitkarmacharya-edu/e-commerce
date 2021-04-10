@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const {
   getProducts,
@@ -7,20 +7,24 @@ const {
   updateProduct,
   createProduct,
   createProductReview,
-} = require("../controllers/productController");
-const { protect, admin } = require("../middleware/authMiddleware");
+} = require('../controllers/productController');
+const { protect, admin } = require('../middleware/authMiddleware');
 
 router
-  .route("/")
+  .route('/')
     .get(getProducts)
     .post(protect, admin, createProduct);
+
+router.
+  route('/top')
+    .post(createProduct);
 
 router
   .route('/:id/review')
     .post(protect, createProductReview)
     
 router
-  .route("/:id")
+  .route('/:id')
     .get(getProductsById)
     .delete(protect, admin, deleteProduct)
     .put(protect, admin, updateProduct)
